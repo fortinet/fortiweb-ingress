@@ -1,0 +1,50 @@
+# Default values for fadc-k8s-ctrl.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+# FortiADC Ingress Controller image from Dockerhub.com
+image:
+  repository: fortinet/fortiweb-ingress
+  pullPolicy: IfNotPresent
+  tag: "1.0.0"
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "fortiweb-ingress"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+
+tolerations:
+  - effect: "NoExecute"
+    key: "node.kubernetes.io/not-ready"
+    operator: "Exists"
+    tolerationSeconds: 30
+  - effect: "NoExecute"
+    key: "node.kubernetes.io/unreachable"
+    operator: "Exists"
+    tolerationSeconds: 30
+
+affinity: {}
+
+# Define Ingress Class for FortiADC Ingress Controller
+controller:
+  ingressClassResource:
+    name: "fwb-ingress-controller"
+    enabled: true
+    default: true
+    controllerValue: "fortinet.com/fwb-ingress-controller"

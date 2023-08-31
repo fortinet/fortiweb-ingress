@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-with-default-backend
+  annotations: {
+    "fortiweb-ip" : "172.23.133.148",
+    "fortiweb-login" : "fad-login1",
+    "fortiweb-ctrl-log" : "enable",
+    "virtual-server-ip" : "192.23.133.6",
+    "virtual-server-addr-type" : "ipv4",
+    "virtual-server-interface" : "port2",
+    "server-policy-web-protection-profile" : "Inline Standard Protection",
+    "server-policy-https-service" : "HTTPS",
+    "server-policy-http-service" : "HTTP",
+    "server-policy-syn-cookie" : "enable",
+    "server-policy-http-to-https" : "disable"
+  }
+
+spec:
+  ingressClassName: fwb-ingress-controller
+  defaultBackend:
+    service:
+      name: service1
+      port:
+        number: 1241
+
+  rules:
+  - host: test.com
+    http:
+      paths:
+      - path: /info
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 1242
