@@ -8,7 +8,7 @@ For more much details, please refer to the [official document](https://docs.fort
 </br>
 </br>
 
-![FortiWEB Ingress Controller Overview](https://github.com/fortinet/fortiweb/ingress-controller/blob/main/figures/fwb-ingress-controller-overview.png?raw=true)
+![FortiWEB Ingress Controller Overview](https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/figures/fwb-ingress-controller-overview.png)
 
 The FortiWEB Ingress Controller fulfills the Kubernetes Ingress resources and allows you to manage FortiWEB objects from Kubernetes. It is deployed in a container of a pod in a Kubernetes cluster. The list below outlines the major functionalities of the FortiWEB Ingress Controller: 
 
@@ -17,7 +17,7 @@ The FortiWEB Ingress Controller fulfills the Kubernetes Ingress resources and al
  - To handle Add/Update/Delete events for watched Ingress resources and automatically implement corresponding actions on FortiWEB.
  
  
- ![Ingress](https://github.com/fortinet/fortiweb/ingress-controller/blob/main/figures/ingress.png?raw=true)
+ ![Ingress](https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/figures/ingress.png)
 
 Ingress is a Kubernetes object that manages the external access to services in a Kubernetes cluster (typically HTTP/HTTPS). Ingress may provide load-balancing and name-based virtual hosting.
 
@@ -38,30 +38,18 @@ FortiWEB, as the Ingress-managed load balancer, not only provides flexibility in
         <tr>
             <td>FortiWEB Ingress Controller</td>
             <td>1.0.0</td>
-            <td>1.0.1</td>
-            <td>1.0.2</td>
-            <td>2.0.0</td>
         </tr>
         <tr>
             <td>Kubernetes</td>
-            <td>1.19.8-1.23.x</td>
-            <td>1.19.8-1.24.x</td>
             <td colspan=2>1.19.8-1.27.x</td>
         </tr>
         <tr>
             <td>FortiWEB</td>
-            <td colspan=4>5.4.5 - 7.4.x*</td>
-        </tr>
-	    <tr>
-            <td>Openshift Container platform</td>
-            <td colspan=3>Not supported</td>
-            <td> 4.7-4.12.x</td>
+            <td colspan=4>6.3.6 - 7.4.x*</td>
         </tr>
     </tbody>
 </table>
 
->**Note** 
->Some features for FortiWEB Ingress Controller version >= 2.0.0 require FortiWEB version >= 7.4.0 to support. Please check the [release notes](https://github.com/fortinet/fortiadc-ingress/blob/main/Release-Notes.md).
 ## Supported Environment
 The FortiWEB Ingress Controller has been verified to run in the Openshift Cluster in Openshift Container Platform environment and Kubernetes cluster in the below environments:
 | Environment | Tools for Building |
@@ -164,6 +152,7 @@ Configuration parameters are required to be specified in the Ingress annotation 
 |--|--|--|
 | fortiweb-ip | The Ingress will be deployed on the FortiWEB with the given IP address. <br> **Note**: This parameter is **required**. | |
 | fortiweb-login | The Kubernetes secret name preserves the FortiWEB authentication information. <br> **Note**: This parameter is **required**. | |
+| fortiweb-port | The network port to log in to Fortiweb. | |
 | fortiweb-ctrl-log | Enable/disable the FortiWEB Ingress Controller log. Once enabled, the FortiWEB Ingress Controller will print the verbose log the next time the Ingress is updated. |enable |
 | virtual-server-ip | The virtual server IP of the virtual server to be configured on the FortiWEB. This IP will be used as the address of the Ingress. <br> **Note**: This parameter is **required**. | |
 | virtual-server-interface | The FortiWEB network interface for the client to access the virtual server. <br> **Note**: This parameter is **required**. | |
@@ -199,7 +188,7 @@ Configuration parameters are required to be specified in the Ingress annotation 
 
 # Deployment of a Simple-fanout Ingress Example
 
-![Simple-fanout example](https://github.com/fortinet/fortiweb/ingress-controller/blob/main/figures/simple-fanout.png?raw=true)
+![Simple-fanout example](https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/figures/simple-fanout.png)
 
 In this example, the client can access service1 with the URL https://test.com/info and access service2 with the
 URL https://test.com/hello.
@@ -211,10 +200,10 @@ Services are deployed under the namespace default.
 
 Service1:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiweb/ingress-controller/main/service_examples/service1.yaml
+    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/service_examples/service1.yaml
 Service2:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiweb/ingress-controller/main/service_examples/service2.yaml
+    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/service_examples/service2.yaml
 
 ## Deploy the Ingress
 
