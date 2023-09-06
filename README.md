@@ -8,8 +8,6 @@ For more much details, please refer to the [official document](https://docs.fort
 </br>
 </br>
 
-![FortiWEB Ingress Controller Overview](https://raw.githubusercontent.com/fortinet/fortiweb-ingress/main/figures/fwb-ingress-controller-overview.png)
-
 The FortiWEB Ingress Controller fulfills the Kubernetes Ingress resources and allows you to manage FortiWEB objects from Kubernetes. It is deployed in a container of a pod in a Kubernetes cluster. The list below outlines the major functionalities of the FortiWEB Ingress Controller: 
 
  - To list and watch Ingress related resources, such as Ingress, Service, Node and Secret. 
@@ -45,7 +43,7 @@ FortiWEB, as the Ingress-managed load balancer, not only provides flexibility in
         </tr>
         <tr>
             <td>FortiWEB</td>
-            <td colspan=4>6.3.6 - 7.4.x*</td>
+            <td colspan=4>6.3.6 - 7.4.x</td>
         </tr>
     </tbody>
 </table>
@@ -103,7 +101,7 @@ To get the verbose output, add --debug option for all the Helm commands.
 ## Get Repo Information
    
 
-    helm repo add fortiweb-ingress-controller https://fortinet.github.io/fortiweb/ingress-controller/
+    helm repo add fortiweb-ingress-controller https://fortinet.github.io/fortiweb-ingress/
 
     helm repo update
 
@@ -139,7 +137,7 @@ As shown in above figure, the FortiWEB Ingress Controller satisfies an Ingress b
 
 To preserve the authentication securely on the Kubernetes cluster, you can save it with the Kubernetes secret. For example
 
-    kubectl create secret generic fad-login -n [namespace] --from-literal=username=admin --from-literal=password=[admin password]
+    kubectl create secret generic fwb-login1 -n [namespace] \ --from-literal=username=admin --from-literal=password=[admin password]
 
 The secret is named fad-login. This value will be specified in the Ingress annotation "fortiweb-login" for the FortiWEB Ingress Controller to get permission access on the FortiWEB.
 
