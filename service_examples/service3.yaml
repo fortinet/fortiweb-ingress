@@ -17,10 +17,8 @@ metadata:
   name: service3
   namespace: default
   annotations: {
-    "health-check-ctrl" : "enable",
-    "health-check-relation" : "OR",
-    "health-check-list" : "LB_HLTHCK_ICMP",
-    "real-server-ssl-profile" : "NONE"
+    "health-check-ctrl" : "HLTHCK_ICMP",
+    "lb-algo" : "round-robin",
   }
 spec:
   type: NodePort
