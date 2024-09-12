@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cr-with-web-profile
+  annotations: {
+    "fortiweb-ip" : "172.23.133.148",
+    "fortiweb-port" : "443",
+    "fortiweb-login" : "fad-login1",
+    "fortiweb-ctrl-log" : "enable",
+    "virtual-server-ip" : "192.168.0.9",
+    "virtual-server-addr-type" : "ipv4",
+    "virtual-server-interface" : "port3",
+    "virtual_server_profile" : "just_a_test",
+    "server-policy-web-protection-profile" : "Inline Standard Protection",
+    "server-policy-https-service" : "HTTPS",
+    "server-policy-http-service" : "HTTP",
+    "server-policy-syn-cookie" : "enable",
+    "server-policy-http-to-https" : "disable",
+    "content-routing-web-protect-profile" : "test.com_service1:Inline Alert Only,test.com_service2:Inline Alert Only"
+  }
+spec:
+  ingressClassName: fwb-ingress-controller
+  rules:
+  - host: test.com
+    http:
+      paths:
+      - path: /info
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 1243
+      - path: /test
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+
