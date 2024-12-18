@@ -1,0 +1,41 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+      name: tls
+  name: tls
+  namespace: test
+  annotations: {
+    "ingress-controller" : "fwb-ingress-controller",
+    "fortiweb-ip" : "172.23.133.148",
+    "fortiweb-port" : "443",
+    "fortiweb-login" : "fad-login1",
+    "fortiweb-ctrl-log" : "enable",
+    "virtual-server-ip" : "192.23.133.6",
+    "virtual-server-addr-type" : "ipv4",
+    "virtual-server-interface" : "port3",
+    "server-policy-web-protection-profile" : "Inline Standard Protection",
+    "server-policy-https-service" : "HTTPS",
+    "server-policy-http-service" : "HTTP",
+    "server-policy-syn-cookie" : "enable",
+    "static_route_intf" : "port1",
+    "server-policy-http-to-https" : "disable",
+    "content-routing-web-protect-profile" : "test.com_fad-app:Inline Alert Only"
+  }
+
+spec:
+  host: test.com
+  tls:
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN PRIVATE KEY-----
+      -----END PRIVATE KEY-----
+    termination: edge
+  path: "/info"
+  port:
+      targetPort: 1234-tcp
+  to:
+      kind: Service
+      name: fwb-app
