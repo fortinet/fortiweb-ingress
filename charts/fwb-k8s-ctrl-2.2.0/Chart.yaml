@@ -1,0 +1,7 @@
+apiVersion: v2
+name: fwb-k8s-ctrl
+version: 2.2.0
+kubeVersion: ">= 1.22-0, <= 1.36-0"
+description: A Helm chart for FortiWeb Ingress Controller
+type: application
+appVersion: "2.2.0"
